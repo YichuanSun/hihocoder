@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-int a[7][3];
+int a[7][3],x[10],y[10];
 bool f,used[10];
 void dfs(int l) {
     if (f)  return;
@@ -15,26 +15,19 @@ void dfs(int l) {
     for (int i=1;i<=6;i++)  {
         if (used[i])    continue;
         used[i]=true;
+        a[l][1]=x[i],a[l][2]=y[i];
         dfs(l+1);
-        if (f)  return;
-        swap(a[i][1],a[i][2]);
+        a[l][1]=y[i],a[l][2]=x[i];
         dfs(l+1);
         used[i]=false;
     }
-//    for (int i=l;i<=6;i++)  {
-//        dfs(l+1);
-//        if (f)  return;
-//        swap(a[i][1],a[i][2]);
-//        dfs(l+1);
-//        if (f)  return;
-//    }
 }
 int main()  {
     int n;
     scanf("%d",&n);
     for (int i=0;i<n;i++)   {
         for (int i=1;i<=6;i++)
-            scanf("%d%d",&a[i][1],&a[i][2]);
+            scanf("%d%d",&x[i],&y[i]);
         dfs(1);
         if (f)  printf("YES\n");
         else printf("NO\n");
